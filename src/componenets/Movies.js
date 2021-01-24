@@ -1,28 +1,34 @@
 import React from 'react';
+import MovieRow from './MovieRow'
 
 const Movies = ({ movies }) => {
-    return (
-        <div>
-        <center><h1>Contact List</h1></center>
-        {movies.map((movie) => (
-            <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src={movie.cover_url} alt=""/></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">{movie.title}</a>
-                </h4>
-                <h5>Director : {movie.director}</h5>
-                <h5>Release year : { movie.release_year}</h5>
-                <h5>genre : { movie.genre}</h5>
-                <p class="card-text"><h5>Synopsis : { movie.synopsis}</h5></p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-            </div>
-    ))}
+       
+  var movieCatalogJsx = []
+  var index= 0
+  while ((index + 3) < movies.length) {
+    var movieRow = movies.splice(0,3) ;
+    var movieRowJsx = <MovieRow movies={movieRow}/> ; 
+    movieCatalogJsx.push(movieRowJsx) ;
+    index = index + 3  ;}     
+    
+    if (movies.length === 1) {
+      const movieRowJsx = <MovieRow movies={movies[0]}/>
+      movieCatalogJsx.push(movieRowJsx) ;
+    } else if (movies.length === 2) {
+      const movieRowJsx = <MovieRow movies={movies.slice(0,2)}/>
+      movieCatalogJsx.push(movieRowJsx) ;
+    }
+  
+  
+  return (
+        
+         
+
+
+
+        <div class="container">
+        <h1 align="center">Movies Catalog</h1>
+       { movieCatalogJsx }
     </div>
     )
 };
